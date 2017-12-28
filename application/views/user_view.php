@@ -8,9 +8,10 @@
 
 	<?php 
 
+		// echo $results;
 		foreach ($results as $object) {
 			
-			echo $object->id . "<br>";
+			echo $object->username . "<br>";
 		}
 	?>
 </body>
