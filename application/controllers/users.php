@@ -64,6 +64,28 @@ class Users extends CI_Controller{
 
 			redirect('home');
 		}
+		else{
+			$username = $this->input->post('username');
+			$password = $this->input->post('password');
+
+			$user_id = $this->user_model->login_user($username, $password);
+
+			if($user_id){
+
+				$user_data = array(
+					'user_id' => $user_id,
+					'username' => $username,
+					'logged_in' => true);
+
+				$this->session->set_userdata($user_data);
+				$this->session->set_flashdata('login_success', 'You are now logged in');
+				redirect('home/index');
+			}
+			else{
+				$this->session->set_flashdata('login_failed', 'Sorry you are not logged in');
+				redirect('home/index');
+			}
+		}
 
 		// echo $this->input->post('username'); //Remplaza a echo $_POST[];
 	}
